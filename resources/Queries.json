@@ -1,0 +1,139 @@
+[
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getDataById",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT * FROM public.\"PG-KitchenSink\" WHERE \"aBigInt\" = {id} ORDER BY \"anInteger\";",
+    "queryParameters": [
+      {
+        "name": "id",
+        "type": "GUID"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getJsonById",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT \"aJson\" FROM public.\"PG-KitchenSink\" WHERE \"aBigInt\" = {id} ORDER BY \"anInteger\";",
+    "queryParameters": [
+      {
+        "name": "id",
+        "type": "GUID"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getDataByOwnerId",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT * FROM public.\"PG-KitchenSink\" WHERE \"ownerId\" = {ownerId} ORDER BY \"anInteger\";",
+    "queryParameters": [
+      {
+        "name": "ownerId",
+        "type": "GUID"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getDataByBooleanValue",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT * FROM public.\"PG-KitchenSink\" WHERE \"aBoolean\" = {aBoolInput};",
+    "queryParameters": [
+      {
+        "name": "aBoolInput",
+        "type": "BOOLEAN"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getDataWithTimestampGreaterThan",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT * FROM public.\"PG-KitchenSink\" WHERE \"aTimestamp\" > {timeInput} ORDER BY \"anInteger\";",
+    "queryParameters": [
+      {
+        "name": "timeInput",
+        "type": "TIMESTAMP"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getDataContainingAllOfDateArray",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT * FROM public.\"PG-KitchenSink\" WHERE \"aDateArray\" @> {dateArrayInput};",
+    "queryParameters": [
+      {
+        "name": "dateArrayInput",
+        "type": "ARRAY_DATE"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getDataContainingAnyOfDateArray",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT * FROM public.\"PG-KitchenSink\" WHERE \"aDateArray\" && {dateArrayInput} ORDER BY \"anInteger\";",
+    "queryParameters": [
+      {
+        "name": "dateArrayInput",
+        "type": "ARRAY_DATE"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getDataContainingAnyOfVarcharArray",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT * FROM public.\"PG-KitchenSink\" WHERE \"aVarcharArray\" && {varcharArrayInput} ORDER BY \"anInteger\";",
+    "queryParameters": [
+      {
+        "name": "varcharArrayInput",
+        "type": "ARRAY_VARCHAR"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getIntegerArrayIsSupersetOfInput",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT \"anIntegerArray\" FROM public.\"PG-KitchenSink\" WHERE \"anIntegerArray\" @> {integerArrayInput};",
+    "queryParameters": [
+      {
+        "name": "integerArrayInput",
+        "type": "ARRAY_INTEGER"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getIntegerArrayIsSubsetOfInput",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT \"anIntegerArray\" FROM public.\"PG-KitchenSink\" WHERE \"anIntegerArray\" <@ {integerArrayInput};",
+    "queryParameters": [
+      {
+        "name": "integerArrayInput",
+        "type": "ARRAY_INTEGER"
+      }
+    ]
+  },
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getNullableString",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT \"aNullableVarchar\" FROM public.\"PG-KitchenSink\";"
+  }
+]

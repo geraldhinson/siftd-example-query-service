@@ -1,0 +1,16 @@
+[
+  {
+    "enabled": true,
+    "serviceName": "unittests",
+    "methodName": "getStateCountyMap",
+    "methodType": "STANDALONE_REQUEST",
+    "query": "SELECT * from public.\"GetStateCountyMap\"({states});",
+    "queryParameters": [
+      {
+        "name": "states",
+        "type": "ARRAY_VARCHAR",
+        "optional": true
+      }
+    ]
+  }
+]

@@ -24,9 +24,10 @@ func NewSecuredQueriesRouter(queryService *serviceBase.ServiceBase) *SecuredQuer
 	//
 	// identity required queries can be called with MATCHING_IDENTITY or MACHINE_IDENTITY
 	//
-	var authModelUsers = queryService.NewAuthModel(security.ONE_DAY, []security.AuthTypes{security.MACHINE_IDENTITY, security.MATCHING_IDENTITY}, nil)
-	if authModelUsers == nil {
-		queryService.Logger.Fatalf("Failed to initialize AuthModelUsers")
+	authModelUsers, err := queryService.NewAuthModel(security.REALM_MEMBER, security.MATCHING_IDENTITY, security.ONE_DAY, nil)
+	if err != nil {
+		queryService.Logger.Fatalf("Failed to initialize AuthModelUsers in SecuredQueriesRouter : %v", err)
+		return nil
 	}
 
 	//---------------------------------------------
@@ -34,9 +35,9 @@ func NewSecuredQueriesRouter(queryService *serviceBase.ServiceBase) *SecuredQuer
 	//
 	// queries that lack an identity can be called with MACHINE_IDENTITY only
 	//
-	var authModelMachine = queryService.NewAuthModel(security.ONE_DAY, []security.AuthTypes{security.MACHINE_IDENTITY}, nil)
-	if authModelMachine == nil {
-		queryService.Logger.Fatalf("Failed to initialize AuthModelMachine")
+	authModelMachine, err := queryService.NewAuthModel(security.REALM_MACHINE, security.VALID_IDENTITY, security.ONE_HOUR, nil)
+	if err != nil {
+		queryService.Logger.Fatalf("Failed to initialize AuthModelMachine in SecuredQueriesRouter : %v", err)
 	}
 
 	// OK. Auth is defined. Now use the helper code to do the rest of the heavy lifting here.

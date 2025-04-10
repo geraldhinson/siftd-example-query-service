@@ -18,14 +18,15 @@ func NewPublicQueriesRouter(queryService *serviceBase.ServiceBase) *PublicQuerie
 	//    easily seen in the routers folder)
 	// 2. It is important for the service writer to define the auth model for all routers
 	//
-	var authModelUsers = queryService.NewAuthModel(security.ONE_DAY, []security.AuthTypes{security.NO_AUTH}, nil)
-	if authModelUsers == nil {
-		queryService.Logger.Fatalf("Failed to initialize AuthModelUsers in PublicQueriesRouter")
+	authModel, err := queryService.NewAuthModel(security.NO_REALM, security.NO_AUTH, security.NO_EXPIRY, nil)
+	if err != nil {
+		queryService.Logger.Fatalf("Failed to initialize AuthModelUsers in PublicQueriesRouter : %v", err)
+		return nil
 	}
 
 	// OK. Auth is defined. Now use the helper code to do the rest of the heavy lifting here.
 	//
-	PublicQueriesRoutesHelper := queryhelpers.NewPublicQueriesRoutesHelper(queryService, authModelUsers)
+	PublicQueriesRoutesHelper := queryhelpers.NewPublicQueriesRoutesHelper(queryService, authModel)
 	if PublicQueriesRoutesHelper == nil {
 		queryService.Logger.Println("Error creating PublicQueriesRoutesHelper")
 		return nil

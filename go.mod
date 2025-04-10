@@ -1,13 +1,13 @@
 module github.com/geraldhinson/siftd-example-query-service
 
-go 1.23.6
+go 1.24.2
 
 require github.com/sirupsen/logrus v1.9.3 // indirect
 
 require (
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
-	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
@@ -32,8 +32,8 @@ require (
 )
 
 require (
-	github.com/geraldhinson/siftd-base v1.23.6
-	github.com/geraldhinson/siftd-queryservice-base v1.23.6
+	github.com/geraldhinson/siftd-base v1.24.1
+	github.com/geraldhinson/siftd-queryservice-base v1.24.1
 	github.com/spf13/viper v1.20.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 )

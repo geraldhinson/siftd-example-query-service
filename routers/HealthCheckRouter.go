@@ -18,14 +18,15 @@ func NewHealthCheckRouter(queryService *serviceBase.ServiceBase) *HealthCheckRou
 	//    easily seen in the routers folder)
 	// 2. It is important for the service writer to define the auth model for all routers
 	//
-	var authModelUsers = queryService.NewAuthModel(security.ONE_DAY, []security.AuthTypes{security.NO_AUTH}, nil)
-	if authModelUsers == nil {
-		queryService.Logger.Fatalf("Failed to initialize AuthModelUsers in HealthCheckServiceRouter")
+	authModel, err := queryService.NewAuthModel(security.NO_REALM, security.NO_AUTH, security.NO_EXPIRY, nil)
+	if err != nil {
+		queryService.Logger.Fatalf("Failed to initialize AuthModelUsers in HealthCheckRouter : %v", err)
+		return nil
 	}
 
 	// OK. Auth is defined. Now use the helper code to do the rest of the heavy lifting here.
 	//
-	HealthCheckRoutesHelper := queryhelpers.NewHealthCheckRoutesHelper(queryService, authModelUsers)
+	HealthCheckRoutesHelper := queryhelpers.NewHealthCheckRoutesHelper(queryService, authModel)
 	if HealthCheckRoutesHelper == nil {
 		queryService.Logger.Println("Error creating HealthCheckRoutesHelper")
 		return nil

@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"strings"
 
 	"github.com/geraldhinson/siftd-base/pkg/constants"
+	"github.com/geraldhinson/siftd-base/pkg/helpers"
+	"github.com/geraldhinson/siftd-base/pkg/security"
 	"github.com/geraldhinson/siftd-base/pkg/serviceBase"
-	"github.com/geraldhinson/siftd-example-query-service/routers"
+	"github.com/geraldhinson/siftd-queryservice-base/pkg/queryhelpers"
 )
 
 func main() {
@@ -18,19 +19,22 @@ func main() {
 		return
 	}
 
-	SecuredQueriesRouter := routers.NewSecuredQueriesRouter(queryService)
+	SecuredQueriesRouter := queryhelpers.NewSecuredQueriesRouter(
+		queryService,
+		security.REALM_MEMBER, security.MATCHING_IDENTITY, security.ONE_DAY, nil, // queries that include an identity in the URL
+		security.REALM_MACHINE, security.VALID_IDENTITY, security.ONE_HOUR, nil) // queries that don't include an identity in the URL
 	if SecuredQueriesRouter == nil {
 		queryService.Logger.Fatalf("Failed to create secured queries api server. Shutting down.")
 		return
 	}
 
-	PublicQueriesRouter := routers.NewPublicQueriesRouter(queryService)
+	PublicQueriesRouter := queryhelpers.NewPublicQueriesRouter(queryService, security.NO_REALM, security.NO_AUTH, security.NO_EXPIRY, nil)
 	if PublicQueriesRouter == nil {
 		queryService.Logger.Fatalf("Failed to create public queries api server. Shutting down.")
 		return
 	}
 
-	HealthCheckRouter := routers.NewHealthCheckRouter(queryService)
+	HealthCheckRouter := queryhelpers.NewHealthCheckRouter(queryService, security.NO_REALM, security.NO_AUTH, security.NO_EXPIRY, nil)
 	if HealthCheckRouter == nil {
 		queryService.Logger.Fatalf("Failed to create health check api server. Shutting down.")
 		return
@@ -45,14 +49,12 @@ func main() {
 
 	// if we are running on localhost, we can add a fake identity service for testing (id is hardcoded in FakeKeyStore.go)
 	if strings.Contains(listenAddress, "localhost") {
-		FakeIdentityServiceRouter := routers.NewFakeIdentityServiceRouter(queryService)
+		FakeIdentityServiceRouter := helpers.NewFakeIdentityServiceRouter(queryService, security.NO_REALM, security.NO_AUTH, security.NO_EXPIRY, nil)
 		if FakeIdentityServiceRouter == nil {
 			queryService.Logger.Fatalf("Failed to create fake identity service api server (for testing only). Shutting down.")
 			return
 		}
 	}
 
-	queryService.Logger.Printf("This service is listening on: %s", listenAddress)
-	http.ListenAndServe(listenAddress, queryService.Router)
-
+	queryService.ListenAndServe()
 }

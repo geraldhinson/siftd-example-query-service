@@ -32,8 +32,8 @@ require (
 )
 
 require (
-	github.com/geraldhinson/siftd-base v1.24.1
-	github.com/geraldhinson/siftd-queryservice-base v1.24.1
+	github.com/geraldhinson/siftd-base v1.24.3
+	github.com/geraldhinson/siftd-queryservice-base v1.24.3
 	github.com/spf13/viper v1.20.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 )

@@ -22,12 +22,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/createFakeMachineToken",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/createFakeMachineToken",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"createFakeMachineToken"
@@ -70,12 +69,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/createFakeUserToken",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/createFakeUserToken",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"createFakeUserToken"
@@ -97,15 +95,66 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8881/v1/health",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/health",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetQueries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{MachineToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries",
+							"protocol": "{{HTTP}}",
+							"host": [
+								"{{QUERIES}}"
+							],
+							"path": [
+								"v1",
+								"queries"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "{{MachineToken}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPublicQueries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/public/queries",
+							"protocol": "{{HTTP}}",
+							"host": [
+								"{{QUERIES}}"
+							],
+							"path": [
+								"v1",
+								"public",
+								"queries"
 							]
 						}
 					},
@@ -123,12 +172,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/queries/unittests/getNullableString",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getNullableString",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -151,15 +199,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8881/v1/queries/unittests/getDataById?id=1",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataById?id=1",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -188,15 +232,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8881/v1/queries/unittests/getJsonById?id=1",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getJsonById?id=1",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -225,16 +265,15 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/identities/GUID-fake-member-GUID/queries/unittests/getDataByOwnerId",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/identities/{{ownerId}}/queries/unittests/getDataByOwnerId",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"identities",
-								"GUID-fake-member-GUID",
+								"{{ownerId}}",
 								"queries",
 								"unittests",
 								"getDataByOwnerId"
@@ -262,12 +301,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/queries/unittests/getDataByBooleanValue?aBoolInput=true",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataByBooleanValue?aBoolInput=true",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -296,12 +334,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/queries/unittests/getDataWithTimestampGreaterThan?timeInput=2025-02-26",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataWithTimestampGreaterThan?timeInput=2025-02-26",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -330,12 +367,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/queries/unittests/getDataContainingAllOfDateArray?dateArrayInput=[\"2025-03-15\", \"2025-03-16\"]",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataContainingAllOfDateArray?dateArrayInput=[\"2025-03-15\", \"2025-03-16\"]",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -364,12 +400,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/queries/unittests/getDataContainingAnyOfDateArray?dateArrayInput=[\"2025-03-01\", \"2025-03-02\", \"2025-03-15\"]",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataContainingAnyOfDateArray?dateArrayInput=[\"2025-03-01\", \"2025-03-02\", \"2025-03-15\"]",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -398,12 +433,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/queries/unittests/getDataContainingAnyOfVarcharArray?varcharArrayInput=[\"def\"]",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataContainingAnyOfVarcharArray?varcharArrayInput=[\"def\"]",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -432,12 +466,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/queries/unittests/getIntegerArrayIsSupersetOfInput?integerArrayInput=[1,2,3]",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getIntegerArrayIsSupersetOfInput?integerArrayInput=[1,2,3]",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -466,12 +499,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8881/v1/queries/unittests/getIntegerArrayIsSubsetOfInput?integerArrayInput=[1,2,3,5,6]",
-							"protocol": "http",
+							"raw": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getIntegerArrayIsSubsetOfInput?integerArrayInput=[1,2,3,5,6]",
+							"protocol": "{{HTTP}}",
 							"host": [
-								"localhost"
+								"{{QUERIES}}"
 							],
-							"port": "8881",
 							"path": [
 								"v1",
 								"queries",
@@ -497,6 +529,40 @@
 		{
 			"name": "Journal",
 			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "QUERIES",
+			"value": "localhost:8881",
+			"type": "string"
+		},
+		{
+			"key": "ownerId",
+			"value": "GUID-fake-member-GUID",
+			"type": "string"
 		}
 	]
 }

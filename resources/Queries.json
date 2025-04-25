@@ -1,6 +1,9 @@
 [
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Simple example showing a select with where / order by",
+    "exampleCall": "GET {{HTTP}}://{{HOSTPORT}}/v1/queries/unittests/getDataById?id=1",
     "serviceName": "unittests",
     "methodName": "getDataById",
     "methodType": "STANDALONE_REQUEST",
@@ -14,6 +17,9 @@
   },
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Simple examle fetching json data",
+    "exampleCall": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getJsonById?id=1",
     "serviceName": "unittests",
     "methodName": "getJsonById",
     "methodType": "STANDALONE_REQUEST",
@@ -27,6 +33,12 @@
   },
   {
     "enabled": true,
+    "authRequired": [
+      "member realm: approved groups",      
+      "machine realm: valid identity"
+    ],
+    "description": "Example call showing how to use the ownerId in the URL as a query param",
+    "exampleCall": "GET {{HTTP}}://{{QUERIES}}/v1/identities/Owner-GUID-here/queries/unittests/getDataByOwnerId",
     "serviceName": "unittests",
     "methodName": "getDataByOwnerId",
     "methodType": "STANDALONE_REQUEST",
@@ -40,6 +52,9 @@
   },
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Example call using a boolean value as a query param",
+    "exampleCall": "GET {{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataByBooleanValue?aBoolInput=true",
     "serviceName": "unittests",
     "methodName": "getDataByBooleanValue",
     "methodType": "STANDALONE_REQUEST",
@@ -53,6 +68,9 @@
   },
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Example shwing how to pass a timestamp as a query param",
+    "exampleCall": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataWithTimestampGreaterThan?timeInput=2025-02-26",
     "serviceName": "unittests",
     "methodName": "getDataWithTimestampGreaterThan",
     "methodType": "STANDALONE_REQUEST",
@@ -66,6 +84,9 @@
   },
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Example demonstrating a - contains all of input - pattern",
+    "exampleCall": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataContainingAllOfDateArray?dateArrayInput=[\"2025-03-15\", \"2025-03-16\"]",
     "serviceName": "unittests",
     "methodName": "getDataContainingAllOfDateArray",
     "methodType": "STANDALONE_REQUEST",
@@ -79,6 +100,9 @@
   },
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Example demonstrating a - contains any of input - pattern",
+    "exampleCall": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataContainingAnyOfDateArray?dateArrayInput=[\"2025-03-01\", \"2025-03-02\", \"2025-03-15\"]",
     "serviceName": "unittests",
     "methodName": "getDataContainingAnyOfDateArray",
     "methodType": "STANDALONE_REQUEST",
@@ -92,6 +116,9 @@
   },
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Another example demonstrating a - contains all of input - pattern. This time using varchar",
+    "exampleCall": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getDataContainingAnyOfVarcharArray?varcharArrayInput=[\"def\"]",
     "serviceName": "unittests",
     "methodName": "getDataContainingAnyOfVarcharArray",
     "methodType": "STANDALONE_REQUEST",
@@ -105,6 +132,9 @@
   },
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Example demonstrating how to query for results that are a superset of the input array",
+    "exampleCall": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getIntegerArrayIsSupersetOfInput?integerArrayInput=[1,2,3]",
     "serviceName": "unittests",
     "methodName": "getIntegerArrayIsSupersetOfInput",
     "methodType": "STANDALONE_REQUEST",
@@ -118,6 +148,9 @@
   },
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Example demonstrating how to query for results that are a subset of the input array",
+    "exampleCall": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getIntegerArrayIsSubsetOfInput?integerArrayInput=[1,2,3,5,6]",
     "serviceName": "unittests",
     "methodName": "getIntegerArrayIsSubsetOfInput",
     "methodType": "STANDALONE_REQUEST",
@@ -131,6 +164,9 @@
   },
   {
     "enabled": true,
+    "authRequired": ["machine realm: valid identity"],
+    "description": "Example illustrating the form of output for a nullable column in a table",
+    "exampleCall": "{{HTTP}}://{{QUERIES}}/v1/queries/unittests/getNullableString",
     "serviceName": "unittests",
     "methodName": "getNullableString",
     "methodType": "STANDALONE_REQUEST",

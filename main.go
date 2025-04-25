@@ -8,8 +8,38 @@ import (
 	"github.com/geraldhinson/siftd-base/pkg/helpers"
 	"github.com/geraldhinson/siftd-base/pkg/security"
 	"github.com/geraldhinson/siftd-base/pkg/serviceBase"
+	"github.com/geraldhinson/siftd-queryservice-base/pkg/models"
 	"github.com/geraldhinson/siftd-queryservice-base/pkg/queryhelpers"
 )
+
+// this is a map of query defined auth property to actual auth policies.
+// NOTE: The map key string *must* match one of the auth properties defined in the queries files
+var policyTranslation = &models.QueryFileAuthPoliciesList{
+	"machine realm: valid identity": {
+		Realm:        security.REALM_MACHINE,
+		AuthType:     security.VALID_IDENTITY,
+		Timeout:      security.ONE_HOUR,
+		ApprovedList: nil,
+	},
+	"member realm: valid identity matching the url ownerid": {
+		Realm:        security.REALM_MEMBER,
+		AuthType:     security.MATCHING_IDENTITY,
+		Timeout:      security.ONE_DAY,
+		ApprovedList: nil,
+	},
+	"member realm: approved groups": {
+		Realm:        security.REALM_MEMBER,
+		AuthType:     security.APPROVED_GROUPS,
+		Timeout:      security.ONE_DAY,
+		ApprovedList: []string{"admin"},
+	},
+	"public access": {
+		Realm:        security.NO_REALM,
+		AuthType:     security.NO_AUTH,
+		Timeout:      security.NO_EXPIRY,
+		ApprovedList: nil,
+	},
+}
 
 func main() {
 	// call setup to get the service base (logging, config, routing) and a keystore
@@ -19,16 +49,16 @@ func main() {
 		return
 	}
 
-	SecuredQueriesRouter := queryhelpers.NewSecuredQueriesRouter(
-		queryService,
-		security.REALM_MEMBER, security.MATCHING_IDENTITY, security.ONE_DAY, nil, // queries that include an identity in the URL
-		security.REALM_MACHINE, security.VALID_IDENTITY, security.ONE_HOUR, nil) // queries that don't include an identity in the URL
+	SecuredQueriesRouter := queryhelpers.NewSecuredQueriesRouter(queryService, policyTranslation)
+	//		security.REALM_MEMBER, security.MATCHING_IDENTITY, security.ONE_DAY, nil, // queries that include an identity in the URL
+	//		security.REALM_MACHINE, security.VALID_IDENTITY, security.ONE_HOUR, nil) // queries that don't include an identity in the URL
 	if SecuredQueriesRouter == nil {
 		queryService.Logger.Fatalf("Failed to create secured queries api server. Shutting down.")
 		return
 	}
 
-	PublicQueriesRouter := queryhelpers.NewPublicQueriesRouter(queryService, security.NO_REALM, security.NO_AUTH, security.NO_EXPIRY, nil)
+	PublicQueriesRouter := queryhelpers.NewPublicQueriesRouter(queryService, policyTranslation)
+	//security.NO_REALM, security.NO_AUTH, security.NO_EXPIRY, nil)
 	if PublicQueriesRouter == nil {
 		queryService.Logger.Fatalf("Failed to create public queries api server. Shutting down.")
 		return

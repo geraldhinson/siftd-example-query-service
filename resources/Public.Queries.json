@@ -1,6 +1,9 @@
 [
   {
     "enabled": true,
+    "authRequired": ["public access"],
+    "description": "Get all the counties for the specified states",
+    "exampleCall": "GET https://HOSTPORT/v1/public/queries/unittests/getStateCountyMap?states=[\"CA\",\"TX\"]",
     "serviceName": "unittests",
     "methodName": "getStateCountyMap",
     "methodType": "STANDALONE_REQUEST",

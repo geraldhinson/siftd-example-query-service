@@ -50,15 +50,12 @@ func main() {
 	}
 
 	SecuredQueriesRouter := queryhelpers.NewSecuredQueriesRouter(queryService, policyTranslation)
-	//		security.REALM_MEMBER, security.MATCHING_IDENTITY, security.ONE_DAY, nil, // queries that include an identity in the URL
-	//		security.REALM_MACHINE, security.VALID_IDENTITY, security.ONE_HOUR, nil) // queries that don't include an identity in the URL
 	if SecuredQueriesRouter == nil {
 		queryService.Logger.Fatalf("Failed to create secured queries api server. Shutting down.")
 		return
 	}
 
 	PublicQueriesRouter := queryhelpers.NewPublicQueriesRouter(queryService, policyTranslation)
-	//security.NO_REALM, security.NO_AUTH, security.NO_EXPIRY, nil)
 	if PublicQueriesRouter == nil {
 		queryService.Logger.Fatalf("Failed to create public queries api server. Shutting down.")
 		return

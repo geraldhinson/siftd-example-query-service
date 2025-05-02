@@ -1,0 +1,32 @@
+WARNING: This likely doesn't quite work yet. 
+WARNING: I suspect the input types differ from the SQL specified types and will require some coercion. 
+WARNING: That said it might save you some time just from a formatting perspective even in its current form.
+
+This is an experiment to see how well ChatGPT would do at generating a tool that would convert from
+a format as used in DBeaver (and similar) to test a query:
+
+    WITH vars AS (
+    SELECT
+        '126f81a3-7482-4884-8b58-6dba1b209d9a'::VARCHAR AS id,
+        'GUID-fake-member-GUID'::varchar AS ownerId
+    )
+    SELECT *
+    FROM public."Resources" r, vars
+    WHERE r."Id" = vars.id
+    AND r."OwnerId" = vars.ownerId;
+
+to the json format used in the queries files (Queries.json and Public.Queries.json) which looks like this:
+
+    {
+    "query": "SELECT * FROM public.\"Resources\" r WHERE r.\"Id\" = {id} AND r.\"OwnerId\" = {ownerId};",
+    "queryParameters": [
+        {
+        "name": "id",
+        "type": "STRING"
+        },
+        {
+        "name": "ownerId",
+        "type": "STRING"
+        }
+    ]
+    }

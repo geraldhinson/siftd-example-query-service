@@ -1,0 +1,13 @@
+{
+  "query": "SELECT * FROM public.\"Resources\" r WHERE r.\"Id\" = {id} AND r.\"OwnerId\" = {ownerId};",
+  "queryParameters": [
+    {
+      "name": "id",
+      "type": "STRING"
+    },
+    {
+      "name": "ownerId",
+      "type": "STRING"
+    }
+  ]
+}

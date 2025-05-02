@@ -11,6 +11,32 @@
 			"item": [
 				{
 					"name": "CreateFakeServiceJWT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Get the raw text response (not JSON)",
+									"let token = pm.response.text();",
+									"",
+									"// Optional: Trim whitespace if needed",
+									"token = token.trim();",
+									"",
+									"// Set it as an environment variable",
+									"pm.collectionVariables.set(\"MachineToken\", token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -52,6 +78,23 @@
 									"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {",
 									"    console.log(response.json());",
 									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Get the raw text response (not JSON)",
+									"let token = pm.response.text();",
+									"",
+									"// Optional: Trim whitespace if needed",
+									"token = token.trim();",
+									"",
+									"// Set it as an environment variable",
+									"pm.collectionVariables.set(\"UserToken\", token);"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -562,6 +605,19 @@
 		{
 			"key": "ownerId",
 			"value": "GUID-fake-member-GUID",
+			"type": "string"
+		},
+		{
+			"key": "UserToken",
+			"value": ""
+		},
+		{
+			"key": "MachineToken",
+			"value": ""
+		},
+		{
+			"key": "HTTP",
+			"value": "http",
 			"type": "string"
 		}
 	]

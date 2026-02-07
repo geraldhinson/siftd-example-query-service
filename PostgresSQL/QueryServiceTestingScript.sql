@@ -51,7 +51,7 @@ select * from public."PG-KitchenSink" pks
 select * from public."PG-KitchenSink" where "ownerId" = 'GUID-fake-member-GUID'
 select * from public."PG-KitchenSink" where "aGuid" = '1dc478eb-a76a-4ddb-a37f-9c4deeb1e768'
 select * from public."PG-KitchenSink" where "aTimestamp" < to_timestamp('2025-02-26 12:20:02', 'YYYY-MM-DD HH24:MI:SS')
-select * from public."PG-KitchenSink" where "aTimestamp" between '2025-02-26 12:20:01.385' and '2025-02-26 12:20:01.386'
+select * from public."PG-KitchenSink" where "aTimestamp" not between '2025-04-16 12:20:01.385' and '2025-04-17 12:20:01.386'
 select * from public."PG-KitchenSink" where "aDate" in ('2025-02-26', '2025-02-27')
 select * from public."PG-KitchenSink" where "anIntegerArray" <@ ARRAY[2,1,3,4]
 select * from public."PG-KitchenSink" where "anIntegerArray" @> '{2,1,3}'
